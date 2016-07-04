@@ -60,15 +60,17 @@ public class MyCustomAdapter extends ArrayAdapter<String> {
 
                     if (s.equals(file[j].getName())) {
                         int color = R.color.disabledText;
+                        /*
                         if (MainActivity.instance != null) {
                             String url = MainActivity.instance.getBaseUrl()+"/?"+ MainActivity.instance.urls.get(position);
-                            Log.e(LOGTAG, url);
-                            Boolean md5 = MD5.checkMD5(getMD5(url), file[j]);
+                            String md5S = getMD5(url);
+                            Log.e(LOGTAG, md5S);
+                            Boolean md5 = MD5.checkMD5(md5S, file[j]);
                             if (md5) {
                                 color = R.color.md5_match;
                             } else {
                                 color = R.color.md5_nomatch;
-                            }
+                            }*/
                         }
                         //Log.w("BasketBuild","have file: "+s+ ":"+file[j] + " : "+ j+"pos:" + position);
                         holder.text.setTextColor(color);
