@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity
         if (daily) {
             Log.d(LOGTAG, "Setting daily alarm");
             setRecurringAlarm(context);
-        } else {
+        } else { 
             CancelAlarm(context);
         }
     }
