@@ -70,8 +70,9 @@ public class MyCustomAdapter extends ArrayAdapter<String> {
                                 color = R.color.md5_match;
                             } else {
                                 color = R.color.md5_nomatch;
-                            }*/
+                            }
                         }
+                        */
                         //Log.w("BasketBuild","have file: "+s+ ":"+file[j] + " : "+ j+"pos:" + position);
                         holder.text.setTextColor(color);
                         convertView.setEnabled(false);
