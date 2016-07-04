@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- <string name="urlext_val" translatable="false">?w=files&amp;flid=</string> -->
+    <string name="mirrorurl_val">https://www.androidfilehost.com/libs/otf/mirrors.otf.php</string>
+    <string name="mirrordata_val">submit=submit&amp;action=getdownloadmirrors&amp;</string>
+    <string name="selector_val" translatable="false">h4[class=list-group-item-heading] > i[class=fa fa-file-archive-o] + a[href^=/?fid=]</string>
+    <string name="base_val" translatable="false">https://www.androidfilehost.com</string>
+    <string name="flid_val" translatable="false">39788</string>
+    <string name="hour_val" translatable="false">3</string>
+    <string name="minute_val" translatable="false">0</string>
+
+</resources>

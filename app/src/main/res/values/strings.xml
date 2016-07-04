@@ -1,0 +1,38 @@
+<resources>
+    <string name="app_name">AFH Downloader</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_reboot">Reboot to Recovery</string>
+    <string name="flid">Flid</string>
+    <string name="flid_sum">androidfilehost flid value</string>
+    <string name="settings">Settings</string>
+    <string name="adv_set">Advanced</string>
+    <string name="base_url">Base Url</string>
+    <string name="base_sum"></string>
+    <string name="selector">Selector</string>
+    <string name="selector_sum">JSoup select statement</string>
+    <string name="directory">Directory</string>
+    <string name="directory_sum">Dir to download to</string>
+    <string name="external_browser">External Browser</string>
+    <string name="external_sum">Use external browser for download</string>
+    <string name="loading">Loading&#8230;</string>
+    <string name="wifionly">WIFI Only</string>
+    <string name="wifi_sum">Download only over WIFI</string>
+    <string name="extWritePerm">External write permission required download file.</string>
+    <string name="extReadPerm">External read permission required to identify existing downloads.</string>
+    <string name="dailydownload">Daily Download</string>
+    <string name="dailydownload_sum"></string>
+    <string name="hour">Hour</string>
+    <string name="hour_sum"></string>
+    <string name="minute">Minute</string>
+    <string name="minute_sum"></string>
+    <string name="pref_auto">Ensure Daily Download is scheduled after boot</string>
+    <string name="auto">Auto Start</string>
+    <string name="choose">Choose</string>
+    <string name="urlext">Url Extension</string>
+    <string name="urlext_sum"></string>
+    <string name="mirrorurl">Mirrors URL</string>
+    <string name="mirrorurl_sum"></string>
+    <string name="mirrordata">HTTP Mirror POST Data</string>
+    <string name="mirrordata_sum"></string>
+</resources>
+
