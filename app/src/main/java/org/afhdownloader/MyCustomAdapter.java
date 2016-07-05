@@ -1,16 +1,13 @@
 package org.afhdownloader;
 
 import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 
 import java.io.File;
 
@@ -18,29 +15,16 @@ public class MyCustomAdapter extends ArrayAdapter<String> {
     private final Context context;
     private final String[] values;
     private final File[] file;
+    private final String[] md5check;
     private static final String LOGTAG = LogUtil
         .makeLogTag(MainActivity.class);
 
-    public MyCustomAdapter(Context context, String[] values, File[] file) {
+    public MyCustomAdapter(Context context, String[] values, File[] file, String[] md5check) {
         super(context, R.layout.rowlayout, values);
         this.context = context;
         this.values = values;
         this.file = file;
-    }
-
-    public String getMD5(String url) {
-        String md5S ="";
-        try {
-            Document doc = Jsoup.connect(url).timeout(10 * 1000).get();
-            String select_md5 = "h4 + p > code";
-            Elements md5s = doc.select(select_md5);
-            for (Element md5 : md5s) {
-                md5S = md5.ownText();
-            }
-        } catch (Throwable t) {
-            Log.e(LOGTAG,t.getMessage());
-        }
-        return md5S;
+        this.md5check = md5check;
     }
 
     @Override
@@ -54,27 +38,22 @@ public class MyCustomAdapter extends ArrayAdapter<String> {
             convertView = inflater.inflate(R.layout.rowlayout, parent, false);
             holder = new ViewHolder();
             holder.text = (TextView) convertView.findViewById(R.id.label);
-            convertView.setTag(holder);//Log.w("BasketBuild",s);
+            convertView.setTag(holder);
+
             try {
                 for (int j = 0; j < file.length; j++) {
-
                     if (s.equals(file[j].getName())) {
-                        int color = R.color.disabledText;
-                        /*
-                        if (MainActivity.instance != null) {
-                            String url = MainActivity.instance.getBaseUrl()+"/?"+ MainActivity.instance.urls.get(position);
-                            String md5S = getMD5(url);
-                            Log.e(LOGTAG, md5S);
-                            Boolean md5 = MD5.checkMD5(md5S, file[j]);
-                            if (md5) {
-                                color = R.color.md5_match;
-                            } else {
-                                color = R.color.md5_nomatch;
-                            }
+                        int color = ContextCompat.getColor(context, R.color.disabledText);
+                        Log.d(LOGTAG, file[j].getName() + " md5: " + md5check[position]);
+                        if (md5check[position].equalsIgnoreCase("Y") ) {
+                            color =ContextCompat.getColor(context, R.color.md5_match);
+                        } else if (md5check[position].equalsIgnoreCase("N")) {
+                            color = ContextCompat.getColor(context, R.color.md5_nomatch);
                         }
-                        */
-                        //Log.w("BasketBuild","have file: "+s+ ":"+file[j] + " : "+ j+"pos:" + position);
                         holder.text.setTextColor(color);
+
+
+                        //Log.w("BasketBuild","have file: "+s+ ":"+file[j] + " : "+ j+"pos:" + position);
                         convertView.setEnabled(false);
                     }
                 }

@@ -20,9 +20,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
-import java.io.DataOutputStream;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -61,7 +59,7 @@ public class MainActivity extends AppCompatActivity
         mainListView.setAdapter( listAdapter );
 
         if (!(EasyPermissions.hasPermissions(this, perms))) {
-            // Ask for both permissions
+            // Ask for both permissio  ns
             EasyPermissions.requestPermissions(this, getString(R.string.extWritePerm), RC_EXT_WRITE, perms);
             //otherwise use app
         }
@@ -91,8 +89,8 @@ public class MainActivity extends AppCompatActivity
     public SharedPreferences getPref() {
         return PreferenceManager.getDefaultSharedPreferences(this);
     }
-    public void setRecurringAlarm(Context context) {
 
+    public void setRecurringAlarm(Context context) {
         SharedPreferences mySharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         int hour =  Integer.parseInt(mySharedPreferences.getString("prefHour", getString(R.string.hour_val)));
         int minute = Integer.parseInt(mySharedPreferences.getString("prefMinute", getString(R.string.minute_val)));
@@ -178,7 +176,6 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -203,11 +200,35 @@ public class MainActivity extends AppCompatActivity
         return mySharedPreferences.getString("prefBase",getString(R.string.base_val)).trim();
     }
 
+    public String readFile(String name) {
+
+        StringBuilder out = new StringBuilder();
+        try {
+            FileInputStream filein = openFileInput(name);
+
+            InputStreamReader inputreader = new InputStreamReader(filein);
+            BufferedReader buffreader = new BufferedReader(inputreader);
+
+
+            String line;
+            while (( line = buffreader.readLine()) != null) {
+                out.append(line);
+            }
+
+
+            filein.close();
+        } catch (Exception e) {
+            Log.d(LOGTAG,"Unable to open: "+name);
+        }
+        return out.toString();
+    }
+
     public void setList(List<String> values)  {
         ArrayList<String> names = new ArrayList<String>();
         SharedPreferences mySharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         String directory = mySharedPreferences.getString("prefDirectory",Environment.DIRECTORY_DOWNLOADS).trim();
         boolean external = mySharedPreferences.getBoolean("prefExternal",false);
+        ArrayList<String> md5check = new ArrayList<String>();
 
         if (external){
             directory = Environment.DIRECTORY_DOWNLOADS;
@@ -227,33 +248,55 @@ public class MainActivity extends AppCompatActivity
             }
         }
 
+
+        //for each returned value - filename and url
         for (int j = 0; j < values.size(); j+=2) {
+            String md5val = "";
             String url = values.get(j+1).trim();
             String name = values.get(j).trim();
             int slash = name.lastIndexOf("/")+1;
             try {
-                String filename = name.substring(slash);
-                names.add(filename);
+                name = name.substring(slash);
             } catch (Exception e){
                 Log.w(LOGTAG, "Cant find slash in "+name);
-                names.add(name);
             }
-/*
-            String prefix = "";
-            if (!(url.startsWith("http"))) {
-                prefix = getBaseUrl();
-            }*/
+            names.add(name);
+
+            //for every result - check if file exists
+            // then check if downloaded md5 exists
+            // then compare
+
+            for (int k = 0; k < file.length; k++) {
+
+                if (name.equals(file[k].getName())) {
+                    String md5 = readFile(name + ".md5");
+                    if (!md5.isEmpty()) {
+                        boolean check = MD5.checkMD5(md5, file[k]);
+
+                        if (check) {
+                            md5val = "Y";
+                        } else {
+                            md5val = "N";
+                        }
+                    }
+                }
+            }
+            md5check.add(md5val);
             urls.add(url.substring(2,url.length()));
+
         }
         //newest on top
         Collections.reverse(urls);
         Collections.reverse(names);
+        Collections.reverse(md5check);
         String[] namesS = new String[names.size()];
         namesS = names.toArray(namesS);
         // Find the ListView resource.
         ListView mainListView = (ListView) findViewById( R.id.listView );
+        String [] md5checkS = new String[md5check.size()];
+        md5checkS = md5check.toArray(md5checkS);
 
-        MyCustomAdapter listAdapter = new MyCustomAdapter(this, namesS, file);
+        MyCustomAdapter listAdapter = new MyCustomAdapter(this, namesS, file, md5checkS);
         //ListAdapter listAdapter =  new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, names);
 
         // Set the ArrayAdapter as the ListView's adapter.
@@ -280,7 +323,7 @@ public class MainActivity extends AppCompatActivity
         });
     }
 
-    	/**
+    /**
 	 * Executes commands as root user
 	 * @author http://muzikant-android.blogspot.com/2011/02/how-to-get-root-access-and-execute.html
 	 */

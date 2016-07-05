@@ -121,6 +121,21 @@ public class Download extends Service {
         return mySharedPreferences.getString("prefBase",getString(R.string.base_val)).trim()+"/";
     }
 
+    public String getMD5(String url) {
+        String md5S ="";
+        try {
+            Document doc = Jsoup.connect(url).timeout(10 * 1000).get();
+            String select_md5 = "h4 + p > code";
+            Elements md5s = doc.select(select_md5);
+            for (Element md5 : md5s) {
+                md5S = md5.ownText();
+            }
+        } catch (Throwable t) {
+            Log.e(LOGTAG,t.getMessage());
+        }
+        return md5S;
+    }
+
     public ArrayList<String> getDLUrl(String url){
         SharedPreferences mySharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         String data = mySharedPreferences.getString("prefMirrorData",getString(R.string.mirrordata_val)) + url;
@@ -166,19 +181,19 @@ public class Download extends Service {
         }
 
         //create md5 file
-        /*
         try {
             String aUrl = urls.get(0);
             int slash = aUrl.lastIndexOf("/");
-            String filename = aUrl.substring(slash+1);
+            String filename = aUrl.substring(slash+1)+".md5";
             String body = getMD5(getBaseUrl()+"/?"+url);
-
-            Log.d(LOGTAG, filename +": "+body);
+            FileOutputStream fileout=openFileOutput(filename, MODE_PRIVATE);
+            OutputStreamWriter outputWriter=new OutputStreamWriter(fileout);
+            outputWriter.write(body);
+            outputWriter.close();
 
         } catch (java.io.IOException e) {
             Log.e(LOGTAG,e.getMessage());
         }
-        */
         return urls;
     }
 
