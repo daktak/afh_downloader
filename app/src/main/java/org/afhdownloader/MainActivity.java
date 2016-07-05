@@ -75,6 +75,11 @@ public class MainActivity extends AppCompatActivity
 
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        setAlarm(this);
+        run(this);
+    }
     public void setAlarm(Context context){
         SharedPreferences mySharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         boolean daily = mySharedPreferences.getBoolean("prefDailyDownload",false);
@@ -205,16 +210,13 @@ public class MainActivity extends AppCompatActivity
         StringBuilder out = new StringBuilder();
         try {
             FileInputStream filein = openFileInput(name);
-
             InputStreamReader inputreader = new InputStreamReader(filein);
             BufferedReader buffreader = new BufferedReader(inputreader);
-
-
             String line;
+
             while (( line = buffreader.readLine()) != null) {
                 out.append(line);
             }
-
 
             filein.close();
         } catch (Exception e) {
@@ -223,6 +225,16 @@ public class MainActivity extends AppCompatActivity
         return out.toString();
     }
 
+    public void writeFile(String name, String body){
+        try {
+            FileOutputStream fileout = openFileOutput(name, MODE_PRIVATE);
+            OutputStreamWriter outputWriter = new OutputStreamWriter(fileout);
+            outputWriter.write(body);
+            outputWriter.close();
+        } catch (Exception e) {
+            Log.w(LOGTAG, "Unable to write: "+name);
+        }
+    }
     public void setList(List<String> values)  {
         ArrayList<String> names = new ArrayList<String>();
         SharedPreferences mySharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
@@ -272,22 +284,16 @@ public class MainActivity extends AppCompatActivity
                     String md5 = readFile(name + ".md5");
                     if (!md5.isEmpty()) {
                         String md5calc = readFile(name+".calc.md5");
-                        if (md5calc.isEmpty()||md5calc == null) {
+                        if (md5calc.isEmpty()) {
                             md5calc = MD5.calculateMD5(file[k]);
-
-                            try {
-                                FileOutputStream fileout = openFileOutput(name + ".calc.md5", MODE_PRIVATE);
-                                OutputStreamWriter outputWriter = new OutputStreamWriter(fileout);
-                                outputWriter.write(md5calc);
-                                outputWriter.close();
-                            } catch (Exception e) {
-                                Log.w(LOGTAG, e.getMessage());
-                            }
                         }
                         if (md5calc.equalsIgnoreCase(md5)) {
                             md5val = "Y";
+                            //cache this result
+                            writeFile(name+".calc.md5", md5calc);
                         } else {
                             md5val = "N";
+                            //don't cache, in the event the file is still downloading
                         }
 
                     }
