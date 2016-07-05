@@ -14,14 +14,16 @@ public class MyCustomAdapter extends ArrayAdapter<String> {
     private final Context context;
     private final String[] values;
     private final File[] file;
+    private final String[] md5check;
     private static final String LOGTAG = LogUtil
         .makeLogTag(MainActivity.class);
 
-    public MyCustomAdapter(Context context, String[] values, File[] file) {
+    public MyCustomAdapter(Context context, String[] values, File[] file, String[] md5check) {
         super(context, R.layout.rowlayout, values);
         this.context = context;
         this.values = values;
         this.file = file;
+        this.md5check = md5check;
     }
 
     @Override
@@ -40,9 +42,17 @@ public class MyCustomAdapter extends ArrayAdapter<String> {
                 for (int j = 0; j < file.length; j++) {
 
                     if (s.equals(file[j].getName())) {
-                        int color = R.color.disabledText;
+                        Log.d(LOGTAG, file[j].getName() + " md5: " + md5check[j]);
+                        if (md5check[j].equals("Y")) {
+                            Log.d(LOGTAG,"Yes");
+                            holder.text.setTextColor(R.color.md5_match);
+                        } else if (md5check[j].equals("N")) {
+                            holder.text.setTextColor(R.color.md5_nomatch);
+                        } else {
+                            holder.text.setTextColor(R.color.disabledText);
+                        }
+
                         //Log.w("BasketBuild","have file: "+s+ ":"+file[j] + " : "+ j+"pos:" + position);
-                        holder.text.setTextColor(color);
                         convertView.setEnabled(false);
                     }
                 }
