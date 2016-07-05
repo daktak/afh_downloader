@@ -251,6 +251,7 @@ public class MainActivity extends AppCompatActivity
 
         //for each returned value - filename and url
         for (int j = 0; j < values.size(); j+=2) {
+            String md5val = "";
             String url = values.get(j+1).trim();
             String name = values.get(j).trim();
             int slash = name.lastIndexOf("/")+1;
@@ -273,21 +274,21 @@ public class MainActivity extends AppCompatActivity
                         boolean check = MD5.checkMD5(md5, file[k]);
 
                         if (check) {
-                            md5check.add("Y");
+                            md5val = "Y";
                         } else {
-                            md5check.add("N");
+                            md5val = "N";
                         }
-                    } else {
-                        md5check.add(null);
                     }
                 }
             }
+            md5check.add(md5val);
             urls.add(url.substring(2,url.length()));
 
         }
         //newest on top
         Collections.reverse(urls);
         Collections.reverse(names);
+        Collections.reverse(md5check);
         String[] namesS = new String[names.size()];
         namesS = names.toArray(namesS);
         // Find the ListView resource.
