@@ -75,6 +75,11 @@ public class MainActivity extends AppCompatActivity
 
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        setAlarm(this);
+        run(this);
+    }
     public void setAlarm(Context context){
         SharedPreferences mySharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         boolean daily = mySharedPreferences.getBoolean("prefDailyDownload",false);
@@ -205,16 +210,13 @@ public class MainActivity extends AppCompatActivity
         StringBuilder out = new StringBuilder();
         try {
             FileInputStream filein = openFileInput(name);
-
             InputStreamReader inputreader = new InputStreamReader(filein);
             BufferedReader buffreader = new BufferedReader(inputreader);
-
-
             String line;
+
             while (( line = buffreader.readLine()) != null) {
                 out.append(line);
             }
-
 
             filein.close();
         } catch (Exception e) {
@@ -223,6 +225,16 @@ public class MainActivity extends AppCompatActivity
         return out.toString();
     }
 
+    public void writeFile(String name, String body){
+        try {
+            FileOutputStream fileout = openFileOutput(name, MODE_PRIVATE);
+            OutputStreamWriter outputWriter = new OutputStreamWriter(fileout);
+            outputWriter.write(body);
+            outputWriter.close();
+        } catch (Exception e) {
+            Log.w(LOGTAG, "Unable to write: "+name);
+        }
+    }
     public void setList(List<String> values)  {
         ArrayList<String> names = new ArrayList<String>();
         SharedPreferences mySharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
@@ -264,20 +276,26 @@ public class MainActivity extends AppCompatActivity
 
             //for every result - check if file exists
             // then check if downloaded md5 exists
-            // then compare
+            // then check if calc exists
 
             for (int k = 0; k < file.length; k++) {
 
                 if (name.equals(file[k].getName())) {
                     String md5 = readFile(name + ".md5");
                     if (!md5.isEmpty()) {
-                        boolean check = MD5.checkMD5(md5, file[k]);
-
-                        if (check) {
+                        String md5calc = readFile(name+".calc.md5");
+                        if (md5calc.isEmpty()) {
+                            md5calc = MD5.calculateMD5(file[k]);
+                        }
+                        if (md5calc.equalsIgnoreCase(md5)) {
                             md5val = "Y";
+                            //cache this result
+                            writeFile(name+".calc.md5", md5calc);
                         } else {
                             md5val = "N";
+                            //don't cache, in the event the file is still downloading
                         }
+
                     }
                 }
             }

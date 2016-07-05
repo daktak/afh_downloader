@@ -10,10 +10,10 @@
     {
       "client_info": {
         "mobilesdk_app_id": "1:999999999999:android:0000000000000000",
-        "client_id": "android:org.basketbuilddownloader",
+        "client_id": "android:org.afhdownloader",
         "client_type": 1,
         "android_client_info": {
-          "package_name": "org.basketbuilddownloader",
+          "package_name": "org.afhdownloader",
           "certificate_hash": []
         }
       },
@@ -22,7 +22,7 @@
           "client_id": "this-is-a-sample-do-not-use.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "org.basketbuilddownloader",
+            "package_name": "org.afhdownloader",
             "certificate_hash": "0000000000000000000000000000000000000000"
           }
         },
