@@ -264,20 +264,32 @@ public class MainActivity extends AppCompatActivity
 
             //for every result - check if file exists
             // then check if downloaded md5 exists
-            // then compare
+            // then check if calc exists
 
             for (int k = 0; k < file.length; k++) {
 
                 if (name.equals(file[k].getName())) {
                     String md5 = readFile(name + ".md5");
                     if (!md5.isEmpty()) {
-                        boolean check = MD5.checkMD5(md5, file[k]);
+                        String md5calc = readFile(name+".calc.md5");
+                        if (md5calc.isEmpty()||md5calc == null) {
+                            md5calc = MD5.calculateMD5(file[k]);
 
-                        if (check) {
+                            try {
+                                FileOutputStream fileout = openFileOutput(name + ".calc.md5", MODE_PRIVATE);
+                                OutputStreamWriter outputWriter = new OutputStreamWriter(fileout);
+                                outputWriter.write(md5calc);
+                                outputWriter.close();
+                            } catch (Exception e) {
+                                Log.w(LOGTAG, e.getMessage());
+                            }
+                        }
+                        if (md5calc.equalsIgnoreCase(md5)) {
                             md5val = "Y";
                         } else {
                             md5val = "N";
                         }
+
                     }
                 }
             }

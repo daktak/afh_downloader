@@ -5,6 +5,6 @@
     <color name="colorAccent">#FF4081</color>
     <color name="colorBlack">#000000</color>
     <color name="disabledText">#333333</color>
-    <color name="md5_match">#00FF00</color>
-    <color name="md5_nomatch">#FF0000</color>
+    <color name="md5_match">#33FF33</color>
+    <color name="md5_nomatch">#FF1111</color>
 </resources>
