@@ -80,6 +80,7 @@ public class MainActivity extends AppCompatActivity
         setAlarm(this);
         run(this);
     }
+
     public void setAlarm(Context context){
         SharedPreferences mySharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         boolean daily = mySharedPreferences.getBoolean("prefDailyDownload",false);
@@ -235,6 +236,7 @@ public class MainActivity extends AppCompatActivity
             Log.w(LOGTAG, "Unable to write: "+name);
         }
     }
+
     public void setList(List<String> values)  {
         ArrayList<String> names = new ArrayList<String>();
         SharedPreferences mySharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
