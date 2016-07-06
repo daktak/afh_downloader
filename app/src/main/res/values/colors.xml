@@ -4,7 +4,7 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="colorBlack">#000000</color>
-    <color name="disabledText">#808080</color>
-    <color name="md5_match">#00CC00</color>
+    <color name="disabledText">#C0C0C0</color>
+    <color name="md5_match">#9ACD32</color>
     <color name="md5_nomatch">#FF0000</color>
 </resources>
