@@ -10,6 +10,8 @@ Stable versions are available through F-Droid:
 ![Alt text](screenshots/ss.png?raw=true "AFH Downloader")
 
 ## MD5
-MD5 can only be calculated for files downloaded through the app. The file will show as having an incorrect MD5 until the list is refreshed once downloading is complete.
+* Green - Verified md5
+* Red - Incorrect or download in progress 
+* Grey - Unable to determine md5
 
 Bitcoin donations 16VEzu37BePgR3o9hAciZkGK2VCAQFE28r

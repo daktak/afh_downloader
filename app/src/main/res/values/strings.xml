@@ -34,5 +34,6 @@
     <string name="mirrorurl_sum"></string>
     <string name="mirrordata">HTTP Mirror POST Data</string>
     <string name="mirrordata_sum"></string>
+    <string name="imgdesc">MD5 indicator</string>
 </resources>
 
