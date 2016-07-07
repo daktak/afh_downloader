@@ -181,20 +181,30 @@ public class Download extends Service {
         }
 
         //create md5 file
-        try {
-            String aUrl = urls.get(0);
-            int slash = aUrl.lastIndexOf("/");
-            String filename = aUrl.substring(slash+1)+".md5";
-            String body = getMD5(getBaseUrl()+"/?"+url);
-            FileOutputStream fileout=openFileOutput(filename, MODE_PRIVATE);
-            OutputStreamWriter outputWriter=new OutputStreamWriter(fileout);
-            outputWriter.write(body);
-            outputWriter.close();
+        new dlMd5().execute(new String[]{urls.get(0), url});
 
-        } catch (java.io.IOException e) {
-            Log.e(LOGTAG,e.getMessage());
-        }
         return urls;
+    }
+
+    private class dlMd5 extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... strings) {
+            try {
+                String aUrl = strings[0];
+                int slash = aUrl.lastIndexOf("/");
+                String filename = aUrl.substring(slash+1)+".md5";
+                String body = getMD5(getBaseUrl()+"/?"+strings[1]);
+                FileOutputStream fileout=openFileOutput(filename, MODE_PRIVATE);
+                OutputStreamWriter outputWriter=new OutputStreamWriter(fileout);
+                outputWriter.write(body);
+                outputWriter.close();
+
+            } catch (java.io.IOException e) {
+                Log.e(LOGTAG,e.getMessage());
+            }
+            return null;
+        }
+
     }
 
     private class downloadFirstThread extends AsyncTask<String, Void, String> {
@@ -215,6 +225,7 @@ public class Download extends Service {
 
         }
     }
+
     private class ParseURLDownload extends AsyncTask<String, Void, String> {
 
         @Override
