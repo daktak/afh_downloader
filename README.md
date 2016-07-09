@@ -9,6 +9,7 @@ Stable versions are available through F-Droid:
 
 ![Alt text](screenshots/ss.png?raw=true "39788")
 ![Alt text](screenshots/i9000-flid-53817.png?raw=true "53817")
+![Alt text](screenshots/p3100-flid-50766.png?raw=true "50766")
 
 ## MD5
 * Green - Verified md5
