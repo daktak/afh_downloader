@@ -94,6 +94,10 @@ public class Download extends Service {
                 urls.add(link.ownText());
                 urls.add(link.attr("href"));
             }
+            //set title
+            Elements h1s = doc.select("h1");
+            String h1 = h1s.get(0).ownText();
+            urls.add(h1);
 
         } catch (Throwable t) {
             Log.e(LOGTAG,t.getMessage());
@@ -253,9 +257,9 @@ public class Download extends Service {
     public void download(String url, String desc, String title, String filename) {
         SharedPreferences mySharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
-        String exten = "zip";
+        String exten = "/";
 
-        if (url.endsWith(exten)) {
+        if (!url.endsWith(exten)) {
 
             Log.d(LOGTAG, "Downloading: " + url);
             boolean external = mySharedPreferences.getBoolean("prefExternal", false);

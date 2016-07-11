@@ -262,9 +262,10 @@ public class MainActivity extends AppCompatActivity
             }
         }
 
+        getSupportActionBar().setTitle(values.get(values.size()-1));
 
         //for each returned value - filename and url
-        for (int j = 0; j < values.size(); j+=2) {
+        for (int j = 0; j < values.size()-1; j+=2) {
             String md5val = "";
             String url = values.get(j+1).trim();
             String name = values.get(j).trim();
