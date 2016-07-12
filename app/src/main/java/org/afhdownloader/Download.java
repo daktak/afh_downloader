@@ -26,6 +26,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 
 /**
@@ -94,6 +95,15 @@ public class Download extends Service {
                 urls.add(link.ownText());
                 urls.add(link.attr("href"));
             }
+            //set title
+            String head = getString(R.string.app_name);
+            try {
+                Elements h1s = doc.select(getString(R.string.head_selector));
+                head = h1s.get(0).ownText();
+            } catch (Exception e) {
+                Log.d(LOGTAG,"Unable to find heading");
+            }
+            urls.add(head);
 
         } catch (Throwable t) {
             Log.e(LOGTAG,t.getMessage());
@@ -253,9 +263,9 @@ public class Download extends Service {
     public void download(String url, String desc, String title, String filename) {
         SharedPreferences mySharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
-        String exten = "zip";
+        String exten = "/";
 
-        if (url.endsWith(exten)) {
+        if (!url.endsWith(exten)) {
 
             Log.d(LOGTAG, "Downloading: " + url);
             boolean external = mySharedPreferences.getBoolean("prefExternal", false);

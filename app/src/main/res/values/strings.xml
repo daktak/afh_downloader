@@ -35,5 +35,8 @@
     <string name="mirrordata">HTTP Mirror POST Data</string>
     <string name="mirrordata_sum"></string>
     <string name="imgdesc">MD5 indicator</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="delete">Delete</string>
 </resources>
 

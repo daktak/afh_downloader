@@ -8,5 +8,7 @@
     <string name="flid_val" translatable="false">39788</string>
     <string name="hour_val" translatable="false">3</string>
     <string name="minute_val" translatable="false">0</string>
-
+    <string name="md5calc_ext" translatable="false">.calc.md5</string>
+    <string name="md5_ext" translatable="false">.md5</string>
+    <string name="head_selector" translatable="false">h1</string>
 </resources>
