@@ -41,7 +41,6 @@ public class MainActivity extends AppCompatActivity
     private static final int REQUEST_PREFS = 99;
     private static final int RC_EXT_WRITE =1;
     private static final int RC_EXT_READ=2;
-    private static final int YES_NO_CALL=80;
     public static MainActivity instance = null;
     public ArrayList<String> md5check = new ArrayList<String>();
     public ArrayList<String> names = new ArrayList<String>();
