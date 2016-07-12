@@ -26,6 +26,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 
 /**
@@ -95,9 +96,14 @@ public class Download extends Service {
                 urls.add(link.attr("href"));
             }
             //set title
-            Elements h1s = doc.select("h1");
-            String h1 = h1s.get(0).ownText();
-            urls.add(h1);
+            String head = getString(R.string.app_name);
+            try {
+                Elements h1s = doc.select(getString(R.string.head_selector));
+                head = h1s.get(0).ownText();
+            } catch (Exception e) {
+                Log.d(LOGTAG,"Unable to find heading");
+            }
+            urls.add(head);
 
         } catch (Throwable t) {
             Log.e(LOGTAG,t.getMessage());
