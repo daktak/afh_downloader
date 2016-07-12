@@ -41,7 +41,6 @@ public class MainActivity extends AppCompatActivity
     private static final int REQUEST_PREFS = 99;
     private static final int RC_EXT_WRITE =1;
     private static final int RC_EXT_READ=2;
-    private static final int YES_NO_CALL=80;
     public static MainActivity instance = null;
     public ArrayList<String> md5check = new ArrayList<String>();
     public ArrayList<String> names = new ArrayList<String>();
@@ -246,7 +245,9 @@ public class MainActivity extends AppCompatActivity
         SharedPreferences mySharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         directory = mySharedPreferences.getString("prefDirectory",Environment.DIRECTORY_DOWNLOADS).trim();
         boolean external = mySharedPreferences.getBoolean("prefExternal",false);
-        md5check = new ArrayList<String>();
+        md5check.clear();
+        urls.clear();
+        names.clear();
         String md5_ext = getString(R.string.md5_ext);
         final String md5_calc_ext = getString(R.string.md5calc_ext);
         if (external){
@@ -304,6 +305,8 @@ public class MainActivity extends AppCompatActivity
                             //don't cache, in the event the file is still downloading
                         }
 
+                    } else {
+                        md5val = "U";
                     }
                 }
             }
