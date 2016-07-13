@@ -58,7 +58,6 @@ public class MyCustomAdapter extends ArrayAdapter<String> {
                         color = ContextCompat.getColor(context, R.color.md5_nomatch);
                         img = ContextCompat.getDrawable(context, R.drawable.nomatch);
                     }
-                    //Log.w("BasketBuild","have file: "+s+ ":"+file[j] + " : "+ j+"pos:" + position);
                     //convertView.setEnabled(false);
                 }
             }
