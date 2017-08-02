@@ -16,4 +16,7 @@ Stable versions are available through F-Droid:
 * Red - Incorrect or download in progress 
 * Grey - Unable to determine md5
 
+![Travis CI](https://api.travis-ci.org/daktak/afh_downloader.svg?branch=master)
+
 Bitcoin donations 16VEzu37BePgR3o9hAciZkGK2VCAQFE28r
+
