@@ -135,7 +135,8 @@ public class Download extends Service {
         String md5S ="";
         try {
             Document doc = Jsoup.connect(url).timeout(10 * 1000).get();
-            String select_md5 = "h4 + p > code";
+	    SharedPreferences mySharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+	    String select_md5 = mySharedPreferences.getString("prefSelector",getString(R.string.md5-sel_val)).trim();
             Elements md5s = doc.select(select_md5);
             for (Element md5 : md5s) {
                 md5S = md5.ownText();
