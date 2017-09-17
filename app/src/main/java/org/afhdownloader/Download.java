@@ -134,12 +134,18 @@ public class Download extends Service {
     public String getMD5(String url) {
         String md5S ="";
         try {
+	    Log.d(LOGTAG, "md5 url: "+url);
             Document doc = Jsoup.connect(url).timeout(10 * 1000).get();
+	    /*
 	    SharedPreferences mySharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 	    String select_md5 = mySharedPreferences.getString("prefSelector",getString(R.string.md5_sel_val)).trim();
+	    */
+	    String select_md5 = "span:has(span:containsOwn(md5))";
+	    Log.d(LOGTAG, "md5 selector: "+select_md5);
             Elements md5s = doc.select(select_md5);
             for (Element md5 : md5s) {
                 md5S = md5.ownText();
+		Log.d(LOGTAG, "md5 value: "+md5S);
             }
         } catch (Throwable t) {
             Log.e(LOGTAG,t.getMessage());
