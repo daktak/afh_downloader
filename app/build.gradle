@@ -8,8 +8,8 @@ android {
         applicationId "org.afhdownloader"
         minSdkVersion 16
         targetSdkVersion 24
-        versionCode 8
-        versionName "0.4.3"
+        versionCode 9
+        versionName "0.4.4"
     }
     buildTypes {
         release {
