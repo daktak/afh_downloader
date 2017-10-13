@@ -1,0 +1,42 @@
+<resources>
+    <string name="app_name">AFH Downloader</string>
+    <string name="action_settings">設定</string>
+    <string name="action_reboot">再起動して回復</string>
+    <string name="flid">Flid</string>
+    <string name="flid_sum">androidfilehost flid 値</string>
+    <string name="settings">設定</string>
+    <string name="adv_set">詳細設定</string>
+    <string name="base_url">ベース Url</string>
+    <string name="base_sum"></string>
+    <string name="selector">セレクター</string>
+    <string name="selector_sum">JSoup 選択ステートメント</string>
+    <string name="directory">ディレクトリー</string>
+    <string name="directory_sum">ダウンロード先ディレクトリー</string>
+    <string name="external_browser">外部ブラウザー</string>
+    <string name="external_sum">ダウンロードに外部ブラウザーを使用します</string>
+    <string name="loading">ロード中&#8230;</string>
+    <string name="wifionly">WIFI のみ</string>
+    <string name="wifi_sum">WIFI 接続時のみダウンロードします</string>
+    <string name="extWritePerm">ファイルのダウンロードは外部ストレージの書き込みアクセス許可が必要です。</string>
+    <string name="extReadPerm">既存のダウンロードを判断するため外部ストレージの読み取りアクセス許可が必要です。</string>
+    <string name="dailydownload">日次ダウンロード</string>
+    <string name="dailydownload_sum"></string>
+    <string name="hour"></string>
+    <string name="hour_sum"></string>
+    <string name="minute">分</string>
+    <string name="minute_sum"></string>
+    <string name="pref_auto">起動後にスケジュールされた日次のダウンロードを行う</string>
+    <string name="auto">自動起動</string>
+    <string name="choose">選択</string>
+    <string name="urlext">URL 拡張</string>
+    <string name="urlext_sum"></string>
+    <string name="mirrorurl">ミラー URL</string>
+    <string name="mirrorurl_sum"></string>
+    <string name="mirrordata">HTTP ミラー POST データ</string>
+    <string name="mirrordata_sum"></string>
+    <string name="imgdesc">MD5 インジケーター</string>
+    <string name="yes">はい</string>
+    <string name="no">いいえ</string>
+    <string name="delete">削除</string>
+</resources>
+
