@@ -7,25 +7,8 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:layout="@layout/fragment_main">
-    <TabHost xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/th_set_menu_tabhost"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
-
-    <TabWidget
-        android:id="@android:id/tabs"
-        android:layout_width="fill_parent"
-        android:layout_height="64dip" />
-
-    <FrameLayout
-        android:id="@android:id/tabcontent"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:paddingTop="75dip">
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/listView" />
-    </FrameLayout>
-    </TabHost>
 </fragment>
