@@ -24,9 +24,12 @@ import android.widget.ListView;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
+import android.widget.TabHost;
+import android.widget.TabHost.TabSpec;
 
 /**
  * daktak
@@ -56,7 +59,42 @@ public class MainActivity extends AppCompatActivity
 
         PreferenceManager.setDefaultValues(this, R.xml.settings, false);
 
-        String[] names = new String[] {getString(R.string.loading)};
+        String[] names = new String[] {getString(R.string.loading)};/*
+        TabHost myTabHost = (TabHost)this.findViewById(R.id.th_set_menu_tabhost);
+        myTabHost.setup();
+
+        for(int i=0; i<5; i++ )
+{
+    final TabSpec x=tabHost2.newTabSpec("x");
+    View row = inflater.inflate(R.layout.indicator1,null);
+    final TextView indicator1 =(TextView) row.findViewById(R.id.textView_indicator1);
+    indicator1.setText(indicator_list[i]);
+    // indicator1.setShadowLayer(1, 0, 1, 0xFF013201);
+
+    x.setIndicator(row);
+
+    x.setContent(new TabContentFactory() {
+        public View createTabContent(String arg) {
+        return gallery2;
+        }
+    });
+
+    tabHost2.addTab(x);
+
+            ls1 = new ListView(Main_screen.this);
+        TabSpec ts1 = myTabHost.newTabSpec("TAB_TAG_1");
+        ts1.setIndicator("Tab1");
+        ts1.setContent(new TabHost.TabContentFactory(){
+            public View createTabContent(String tag)
+            {
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(Main_screen.this,android.R.layout.simple_list_item_1,new String[]{"item1","item2","item3"});
+                ls1.setAdapter(adapter);
+                return ls1;
+            }
+        });
+        myTabHost.addTab(ts1);
+
+}*/
         ListView mainListView = (ListView) findViewById( R.id.listView );
         ListAdapter listAdapter =  new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, names);
         // Set the ArrayAdapter as the ListView's adapter.
@@ -138,11 +176,13 @@ public class MainActivity extends AppCompatActivity
         context.startService(service);
     }
 
+    //get for a specific int
     public String buildPath(Context context) {
         SharedPreferences mySharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         String base = mySharedPreferences.getString("prefBase",getString(R.string.base_val)).trim();
         String flid = mySharedPreferences.getString("prefFlid",getString(R.string.flid_val)).trim();
-        //String url_ext = mySharedPreferences.getString("prefUrlext",getString(R.string.urlext_val)).trim();
+        //if instring ,
+        //List<String> flida = Arrays.asList(flid.split(","));
         String url_ext = "?w=files&flid=";
 
         return base+"/"+url_ext+flid;
