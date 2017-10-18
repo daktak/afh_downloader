@@ -165,8 +165,8 @@ public class Download extends Service {
             HttpURLConnection httpcon = (HttpURLConnection) ((new URL(mUrl).openConnection()));
             httpcon.setDoOutput(true);
             httpcon.setRequestMethod("POST");
-	    httpcon.setsetRequestProperty("User-Agent","Mozilla/5.0 (X11; Fedora; Linux x86_64; rv:55.0) Gecko/20100101 Firefox/55.0");
-	    httpcon.setsetRequestProperty("X-MOD-SBB-CTYPE","xhr");
+	    httpcon.setRequestProperty("User-Agent","Mozilla/5.0 (X11; Fedora; Linux x86_64; rv:55.0) Gecko/20100101 Firefox/55.0");
+	    httpcon.setRequestProperty("X-MOD-SBB-CTYPE","xhr");
             httpcon.connect();
 
             //Write
