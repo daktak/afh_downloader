@@ -84,8 +84,8 @@ public class Download extends Service {
         Log.d(LOGTAG, "Fetch: "+url);
         ArrayList<String> urls = new ArrayList<String>();
         try {
-
-            Document doc = Jsoup.connect(url).timeout(10*1000).get();
+	    String userAgent = getString(R.string.user_agent);
+            Document doc = Jsoup.connect(url).timeout(10*1000).followRedirects(true).userAgent(userAgent).get();
             SharedPreferences mySharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
             String selector = mySharedPreferences.getString("prefSelector",getString(R.string.selector_val)).trim();
             //String selector = getString(R.string.selector_val);
@@ -135,7 +135,8 @@ public class Download extends Service {
         String md5S ="";
         try {
 	    Log.d(LOGTAG, "md5 url: "+url);
-            Document doc = Jsoup.connect(url).timeout(10 * 1000).get();
+	    String userAgent = getString(R.string.user_agent);
+            Document doc = Jsoup.connect(url).timeout(10 * 1000).followRedirects(true).userAgent(userAgent).get();
 	    /*
 	    SharedPreferences mySharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 	    String select_md5 = mySharedPreferences.getString("prefSelector",getString(R.string.md5_sel_val)).trim();
@@ -157,6 +158,7 @@ public class Download extends Service {
         SharedPreferences mySharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         String data = mySharedPreferences.getString("prefMirrorData",getString(R.string.mirrordata_val)) + url;
         String mUrl = mySharedPreferences.getString("prefMirrorURL",getString(R.string.mirrorurl_val));
+	String userAgent = getString(R.string.user_agent);
         Log.d(LOGTAG, "Download parse: " +url);
 
         ArrayList<String> urls = new ArrayList<String>();
@@ -165,7 +167,7 @@ public class Download extends Service {
             HttpURLConnection httpcon = (HttpURLConnection) ((new URL(mUrl).openConnection()));
             httpcon.setDoOutput(true);
             httpcon.setRequestMethod("POST");
-	    httpcon.setRequestProperty("User-Agent","Mozilla/5.0 (X11; Fedora; Linux x86_64; rv:55.0) Gecko/20100101 Firefox/55.0");
+	    httpcon.setRequestProperty("User-Agent",userAgent);
 	    httpcon.setRequestProperty("X-MOD-SBB-CTYPE","xhr");
             httpcon.connect();
 
