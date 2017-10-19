@@ -12,4 +12,5 @@
     <string name="md5calc_ext" translatable="false">.calc.md5</string>
     <string name="md5_ext" translatable="false">.md5</string>
     <string name="head_selector" translatable="false">h1</string>
+    <string name="user_agent" translatable="false">Mozilla/5.0 (X11; Fedora; Linux x86_64; rv:55.0) Gecko/20100101 Firefox/55.0</string>
 </resources>
