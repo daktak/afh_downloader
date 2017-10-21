@@ -5,6 +5,6 @@ android:
     - platform-tools
     - tools
     - build-tools-23.0.2
-    - android-24
+    - android-25
 script:
   - ./gradlew build check

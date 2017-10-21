@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
+import java.net.URLDecoder;
 
 
 /**
@@ -212,9 +213,13 @@ public class Download extends Service {
         protected String doInBackground(String... strings) {
             try {
                 String aUrl = strings[0];
+		String md5_ext = getString(R.string.md5_ext);
                 int slash = aUrl.lastIndexOf("/");
-                String filename = aUrl.substring(slash+1)+".md5";
+                String filename = aUrl.substring(slash+1);
+		filename = URLDecoder.decode(filename) + md5_ext;
+		Log.d(LOGTAG,"Saving File: "+filename);
                 String body = getMD5(getBaseUrl()+"/?"+strings[1]);
+		Log.d(LOGTAG,"Found MD5: "+body);
                 FileOutputStream fileout=openFileOutput(filename, MODE_PRIVATE);
                 OutputStreamWriter outputWriter=new OutputStreamWriter(fileout);
                 outputWriter.write(body);

@@ -182,7 +182,6 @@ public class SwipeDismissListViewTouchListener implements View.OnTouchListener {
                     return false;
                 }
 
-                // TODO: ensure this is a finger, and set a flag
 
                 // Find the child view that was touched (perform a hit test)
                 Rect rect = new Rect();
