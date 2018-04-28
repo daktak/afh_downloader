@@ -38,5 +38,6 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="delete">Delete</string>
+    <string name="action_refresh">Refresh</string>
 </resources>
 

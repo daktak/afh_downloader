@@ -210,6 +210,9 @@ public class MainActivity extends AppCompatActivity
             setAlarm(this);
             return true;
         }
+	if (id == R.id.action_refresh) {
+		run(this);
+	}
         if (id == R.id.action_reboot) {
             ExecuteAsRootBase e = new ExecuteAsRootBase() {
                     @Override

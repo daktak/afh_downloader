@@ -5,7 +5,7 @@
     <string name="mirrordata_val">submit=submit&amp;action=getdownloadmirrors&amp;</string>
     <string name="selector_val" translatable="false">div[class=file-name] > h3 > a[href^=/?fid=]</string>
     <string name="md5_sel_val" tranlatable="false">span:has(span:containsOwn(md5))</string>
-    <string name="base_val" translatable="false">https://www.androidfilehost.com</string>
+    <string name="base_val" translatable="false">https://androidfilehost.com</string>
     <string name="flid_val" translatable="false">39788</string>
     <string name="hour_val" translatable="false">3</string>
     <string name="minute_val" translatable="false">0</string>
